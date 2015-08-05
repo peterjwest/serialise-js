@@ -1,3 +1,7 @@
+# Unreleased
+
+- Added test script to npm for CI automation
+
 # 0.2.0
 
 - Added inline option for serialisation

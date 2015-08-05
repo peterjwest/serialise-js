@@ -22,5 +22,8 @@
   "homepage": "https://github.com/peterjwest/serialise-js",
   "files": [
     "index.js"
-  ]
+  ],
+  "scripts": {
+    "test": "gulp test"
+  }
 }
