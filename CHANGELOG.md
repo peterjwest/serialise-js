@@ -1,3 +1,7 @@
+# Unreleased
+
+- Added installation, usage and extending example to README
+
 # 0.1.0
 
 - Added basic files and configured package.json
