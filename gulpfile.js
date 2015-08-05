@@ -1,6 +1,7 @@
 var fs = require('fs');
 var gulp = require('gulp');
 var gulpIstanbul = require('gulp-istanbul');
+var gulpSequence = require('gulp-sequence');
 var jscs = require('gulp-jscs');
 var mocha = require('gulp-mocha');
 var path = require('path');
@@ -30,4 +31,4 @@ gulp.task('coverage', function(cb) {
   );
 });
 
-gulp.task('test', ['standards', 'coverage']);
+gulp.task('test', gulpSequence('standards', 'coverage'));
