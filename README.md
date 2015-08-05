@@ -1,5 +1,7 @@
 # serialise-js
 
+[![build status](https://circleci.com/gh/peterjwest/serialise-js.svg?&style=shield&circle-token=975d524a7ce4f4e387faa7756e3366498139ad95)](https://circleci.com/gh/peterjwest/serialise-js)
+
 ### An extensible library for serialising JavaScript data
 
 ## Installation

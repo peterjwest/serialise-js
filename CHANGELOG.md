@@ -1,6 +1,7 @@
 # Unreleased
 
 - Added test script to npm for CI automation
+- Added build status to README
 
 # 0.2.0
 
