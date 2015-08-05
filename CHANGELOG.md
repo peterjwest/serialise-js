@@ -3,6 +3,7 @@
 - Added test script to npm for CI automation
 - Added build status to README
 - Changed gulp tasks to run in sequence
+- Added lcov report for CircleCI
 
 # 0.2.0
 
