@@ -4,6 +4,7 @@
 - Added build status to README
 - Changed gulp tasks to run in sequence
 - Added lcov report for CircleCI
+- Added npm and dependencies badges to README
 
 # 0.2.0
 

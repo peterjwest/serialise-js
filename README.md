@@ -1,6 +1,6 @@
 # serialise-js
 
-[![build status](https://circleci.com/gh/peterjwest/serialise-js.svg?&style=shield&circle-token=975d524a7ce4f4e387faa7756e3366498139ad95)](https://circleci.com/gh/peterjwest/serialise-js) [![Coverage Status](https://coveralls.io/repos/peterjwest/serialise-js/badge.svg?branch=master&service=github)](https://coveralls.io/github/peterjwest/serialise-js?branch=master)
+[![npm version][npm-badge]][npm-url] [![build status][circle-badge]][circle-url] [![coverage status][coverage-badge]][coverage-url] [![dependencies status][dependencies-badge]][dependencies-url]
 
 ### An extensible library for serialising JavaScript data
 
@@ -105,3 +105,15 @@ Which outputs:
 ```
 
 This could be neater, still, but you get the idea.
+
+[npm-badge]: https://badge.fury.io/js/serialise-js.svg
+[npm-url]: https://www.npmjs.com/package/serialise-js
+
+[circle-badge]: https://circleci.com/gh/peterjwest/serialise-js.svg?&style=shield&circle-token=975d524a7ce4f4e387faa7756e3366498139ad95
+[circle-url]: https://circleci.com/gh/peterjwest/serialise-js
+
+[coverage-badge]: https://coveralls.io/repos/peterjwest/serialise-js/badge.svg?branch=master&service=github
+[coverage-url]: https://coveralls.io/github/peterjwest/serialise-js?branch=master
+
+[dependencies-badge]: https://david-dm.org/peterjwest/serialise-js.svg
+[dependencies-url]: https://david-dm.org/peterjwest/serialise-js
