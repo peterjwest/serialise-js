@@ -1,6 +1,6 @@
 {
   "name": "serialise-js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An extensible library for serialising JavaScript data",
   "main": "index.js",
   "author": "Pete West <peterjwest3@gmail.com> (https://github.com/peterjwest/)",
