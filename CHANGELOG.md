@@ -1,4 +1,4 @@
-# Unpublished
+# 0.1.0
 
 - Added basic files and configured package.json
 - Added test, standards and coverage scripts
