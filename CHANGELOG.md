@@ -1,3 +1,7 @@
+# Unreleased
+
+- Added inline option for serialisation
+
 # 0.1.1
 
 - Added installation, usage and extending example to README

@@ -19,7 +19,7 @@ serialise({
 });
 ```
 
-Outputs:
+Returns:
 ```
 {
   foo: [
@@ -38,20 +38,22 @@ Outputs:
 
 You can pass in an options object as a second argument to `serialise`:
 - `indent` - Set the characters used for a single indent, default 2 spaces
-- `doubleQuotes` - Set this to true to serialise strings with double quotes
+- `doubleQuotes` - Set this to `true` to serialise strings with double quotes
+- `inline` - Set this to `true` to serialise object and arrays inline, set to a number to serialise inline below lines of this length
 
 Example:
 ```
-var input = { foo: ['bar'] };
-serialise(input, { indent: '⟶', doubleQuotes: true });
+var input = { foo: ['bar', { zim: 'gir' }] };
+serialise(input, { indent: ' ', doubleQuotes: true, inline: 25 });
 ```
 
-Outputs (big surprise):
+Returns:
 ```
 {
-⟶foo: [
-⟶⟶"bar"
-⟶]
+ foo: [
+  "bar",
+  { zim: "gir" }
+ ]
 }
 ```
 

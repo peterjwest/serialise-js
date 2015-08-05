@@ -177,6 +177,34 @@ describe('serialise-js', function() {
         ']'
       ));
     });
+
+    it('serialises an array inline', function() {
+      assert.equal(
+        serialise.array([1, [2, 3]], { indent: '  ' }, [], Infinity),
+        '[1, [2, 3]]'
+      );
+    });
+
+    it('serialises an array inline below a certain line length', function() {
+      assert.equal(
+        serialise.array([1, [2, 3]], { indent: '  ' }, [], 12),
+        '[1, [2, 3]]'
+      );
+
+      assert.equal(
+        serialise.array([[1, 2], [3, 4, 5]], { indent: '  ' }, [], 9),
+        lines(
+          '[',
+          '  [1, 2],',
+          '  [',
+          '    3,',
+          '    4,',
+          '    5',
+          '  ]',
+          ']'
+        )
+      );
+    });
   });
 
   describe('object()', function() {
@@ -228,6 +256,31 @@ describe('serialise-js', function() {
         '}'
       ));
     });
+
+    it('serialises an object inline', function() {
+      assert.equal(
+        serialise.object({ foo: { bar: 'zim' }}, { indent: '  ' }, [], Infinity),
+        '{ foo: { bar: \'zim\' } }'
+      );
+    });
+
+    it('serialises an object inline below a certain line length', function() {
+      assert.equal(
+        serialise.object({ foo: { bar: 'zim' }}, { indent: '  ' }, [], 25),
+        '{ foo: { bar: \'zim\' } }'
+      );
+
+      assert.equal(
+        serialise.object({ foo: { bar: 'zim' }}, { indent: '  ' }, [], 20),
+        lines(
+          '{',
+          '  foo: {',
+          '    bar: \'zim\'',
+          '  }',
+          '}'
+        )
+      );
+    });
   });
 
   it('serialises any type', function() {
@@ -274,6 +327,29 @@ describe('serialise-js', function() {
       '    {',
       '      bar: \'3\',',
       '      zim: /test/',
+      '    }',
+      '  ]',
+      '}'
+    ));
+  });
+
+  it('serialises multiple nested types inline', function() {
+    var data = { foo: [1, 2, { bar: '3', zim: /test/ }] };
+    assert.equal(
+      serialise(data, { inline: true }),
+      '{ foo: [1, 2, { bar: \'3\', zim: /test/ }] }'
+    );
+  });
+
+  it('serialises multiple nested types inline below a certain line length', function() {
+    var data = { foo: [1, [2, 3], { bar: '4' }] };
+    assert.equal(serialise(data, { inline: 20 }), lines(
+      '{',
+      '  foo: [',
+      '    1,',
+      '    [2, 3],',
+      '    {',
+      '      bar: \'4\'',
       '    }',
       '  ]',
       '}'

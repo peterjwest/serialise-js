@@ -1,13 +1,14 @@
-var serialise = module.exports = function(val, options, seen) {
+var serialise = module.exports = function(val, options, seen, inline) {
   options = options || {};
   options.indent = options.indent === undefined ? '  ' : options.indent;
   seen = seen || [];
+  inline = inline === undefined ? (options.inline === true ? Infinity : options.inline) : inline;
 
   var type = serialise.type(val);
-  return serialise[type](val, options, seen);
+  return serialise[type](val, options, seen, inline);
 };
 
-serialise.indent = function(string, indent) {
+serialise._indent = function(string, indent) {
   return string.split('\n').map(function(str) { return indent + str; }).join('\n');
 };
 
@@ -53,31 +54,40 @@ serialise.date = function(val) {
   return 'new Date(\'' + val.toISOString() + '\')';
 };
 
-serialise.array = function(val, options, seen) {
+serialise.array = function(val, options, seen, inline) {
   seen = seen || [];
   if (seen.indexOf(val) !== -1) return '"[Circular]"';
 
   if (val.length === 0) return '[]';
 
-  return '[\n' + val.map(function(item, i) {
-    return serialise.indent(serialise(item, options, seen.concat([val])), options.indent);
-  }).join(',\n') + '\n]';
+  var lines = val.map(function(item, i) {
+    return serialise(item, options, seen.concat([val]), inline - options.indent.length);
+  });
+
+  var inlineArray = '[' + lines.join(', ') + ']';
+  if (inline >= inlineArray.length) {
+    return inlineArray;
+  }
+  return '[\n' + serialise._indent(lines.join(',\n'), options.indent) + '\n]';
 };
 
-serialise.object = function(val, options, seen) {
+serialise.object = function(val, options, seen, inline) {
   seen = seen || [];
   if (seen.indexOf(val) !== -1) return '"[Circular]"';
 
   var keys = Object.keys(val);
-
   if (keys.length === 0) return '{}';
 
   var unescapedKey = /^[a-z$_][a-z$_0-9]*$/i;
-  return '{\n' + keys.map(function(key, i) {
-    var escapedKey = key.match(unescapedKey) ? key : serialise(key, options);
-    return serialise.indent(
-      escapedKey + ': ' + serialise(val[key], options, seen.concat([val])),
-      options.indent
-    );
-  }).join(',\n') + '\n}';
+  var lines = keys.map(function(key, i) {
+    var objectKey = (key.match(unescapedKey) ? key : serialise(key, options)) + ': ';
+    var newInline = inline - (objectKey + options.indent).length;
+    return objectKey + serialise(val[key], options, seen.concat([val]), newInline);
+  });
+
+  var inlineObject = '{ ' + lines.join(', ') + ' }';
+  if (inline >= inlineObject.length) {
+    return inlineObject;
+  }
+  return '{\n' + serialise._indent(lines.join(',\n'), options.indent) + '\n}';
 };
