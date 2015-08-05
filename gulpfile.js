@@ -10,8 +10,6 @@ var textReporter = require('istanbul-text-full-reporter');
 
 var reportOptions = { reporters: [textReporter] };
 
-process.env.CIRCLE_ARTIFACTS = 'circle';
-
 if (process.env.CIRCLE_ARTIFACTS) {
   reportOptions.reporters.unshift('lcov');
   reportOptions.reportOpts = {
